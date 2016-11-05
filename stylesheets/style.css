@@ -1,0 +1,36 @@
+body{
+    background: gray;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+}
+
+.gameContainer{
+    display: inline-block;
+    width: 400px;
+    height: 400px;
+    background: black;
+}
+
+.player1Paddle, .player2Paddle {
+    position: absolute;
+    width: 10px;
+    height: 50px;
+    top: 0;
+    background: white;
+}
+
+.player1Paddle {
+    left: 10px;
+}
+
+.player2Paddle {
+    left: 380px
+}
+
+.ball {
+    position: absolute;
+    width: 5px;
+    height: 5px;
+    background: white;
+}

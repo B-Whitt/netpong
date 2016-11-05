@@ -1,0 +1,23 @@
+{
+  "name": "netpong",
+  "version": "0.0.1",
+  "description": "A networked version of the classic Pong, based on the Incheon game server",
+  "main": "index.js",
+  "scripts": {
+    "start": "node main.js",
+    "postinstall": "browserify src/client/clientMain.js -i nodejs-physijs -o dist/bundle.js -t [ babelify --presets [ es2015 ] ",
+    "watchify": "watchify src/client/clientMain.js -i nodejs-physijs -o dist/bundle.js -v -d -t [ babelify --presets [ es2015 ]"
+  },
+  "author": "Opher Vishnia",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "express": "^4.14.0",
+    "incheon": "github:opherv/Incheon",
+    "query-string": "^4.2.3",
+    "socket.io": "^1.5.1"
+  },
+  "bugs": {
+    "url": "https://github.com/OpherV/netpong/issues"
+  },
+  "homepage": "https://github.com/OpherV/netpong#readme"
+}
