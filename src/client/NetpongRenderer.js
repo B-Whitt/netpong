@@ -20,7 +20,7 @@ class NetpongRenderer extends Renderer {
     }
 
     init() {
-
+        var that = this;
     }
 
     draw() {
@@ -28,19 +28,38 @@ class NetpongRenderer extends Renderer {
 
         //note - animating via the top attribute of a DOM element is a usually
         //bad practice, but used here for code brevity
-        // this.paddle1Sprite.style.top
+        for (let objId of Object.keys(this.sprites)) {
+            if (this.sprites[objId].el) {
+                // console.log(this.sprites[objId]);
+                this.sprites[objId].el.style.top = this.sprites[objId].y + "px";
+            }
+        }
+
+
     }
 
     // add one object
     // return a reference to the object
     addObject(objData) {
-        console.log(objData);
+        let sprite= {
+
+        };
 
         if (objData.class == Paddle) {
+            sprite.playerId = objData.playerId;
 
-            // this.paddle1Sprite = document.querySelector(".player1Paddle");
-            // this.paddle2Sprite = document.querySelector(".player2Paddle");
+            console.log(objData);
+
+            if (objData.id == 1){
+                sprite.el = document.querySelector(".player1Paddle");
+            }
+            else if (objData.id == 2){
+                sprite.el =  document.querySelector(".player2Paddle");
+            }
         }
+
+        this.sprites[objData.id] = sprite;
+        return sprite;
     }
 
     // remove an object from the scene

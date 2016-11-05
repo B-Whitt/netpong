@@ -2,7 +2,7 @@
   "name": "netpong",
   "version": "0.0.1",
   "description": "A networked version of the classic Pong, based on the Incheon game server",
-  "main": "index.js",
+  "main": "main.js",
   "scripts": {
     "start": "node main.js",
     "postinstall": "browserify src/client/clientMain.js -i nodejs-physijs -o dist/bundle.js -t [ babelify --presets [ es2015 ] ",
@@ -15,6 +15,11 @@
     "incheon": "github:opherv/Incheon",
     "query-string": "^4.2.3",
     "socket.io": "^1.5.1"
+  },
+  "devDependencies": {
+    "babel-preset-es2015": "^6.18.0",
+    "babelify": "^7.3.0",
+    "watchify": "^3.7.0"
   },
   "bugs": {
     "url": "https://github.com/OpherV/netpong/issues"

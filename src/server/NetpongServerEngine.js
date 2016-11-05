@@ -14,6 +14,8 @@ class NetpongServerEngine extends ServerEngine{
     start(){
         super.start();
 
+        this.gameEngine.initGame();
+
         this.players = {
             player1: null,
             player2: null

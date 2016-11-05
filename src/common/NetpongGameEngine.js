@@ -16,17 +16,9 @@ class NetpongGameEngine extends GameEngine {
 
         this.worldSettings = {
             width: 400,
-            height: 400
+            height: 400,
+            paddlePadding: 20
         };
-
-        //create the paddle objects
-        this.player1Paddle = new Paddle();
-        this.player2Paddle = new Paddle();
-
-
-        //add paddle objects to the game world
-        this.addObjectToWorld(this.player1Paddle);
-        this.addObjectToWorld(this.player2Paddle);
 
     };
 
@@ -42,7 +34,6 @@ class NetpongGameEngine extends GameEngine {
                 break;
             }
         }
-
         if (playerPaddle) {
             if (inputData.input == "up") {
                 playerPaddle.y -= 5;
@@ -52,6 +43,20 @@ class NetpongGameEngine extends GameEngine {
             }
         }
     };
+
+    initGame(){
+        //create the paddle objects
+        this.player1Paddle = new Paddle(++this.world.idCount, this.worldSettings.paddlePadding, this.worldSettings.paddlePadding);
+        this.player2Paddle = new Paddle(++this.world.idCount, this.worldSettings.width - this.worldSettings.paddlePadding, this.worldSettings.paddlePadding);
+
+        //associate paddels with the right players
+        this.player1Paddle.playerId = 0;
+        this.player2Paddle.playerId = 1;
+
+        //add paddle objects to the game world
+        this.addObjectToWorld(this.player1Paddle);
+        this.addObjectToWorld(this.player2Paddle);
+    }
 
     attachPaddle(paddleId, playerId){
         //which player?
