@@ -14,7 +14,13 @@ class NetpongClientEngine extends ClientEngine{
         this.gameEngine.renderer = this.renderer; //TODO renderer shouldn't be tightly coupled with the game engine
 
         //initialize object synchronization:
-        const synchronizer = new Synchronizer(this);
+        var syncOptions = {
+            extrapolate: {
+                localObjBending: 0.0,
+                remoteObjBending: 0.6
+            }
+        };
+        const synchronizer = new Synchronizer(this, syncOptions);
         synchronizer.extrapolateObjectSelector = () => { return true; };
 
         this.serializer.registerClass(require('../common/Paddle'));
