@@ -32,6 +32,7 @@ class NetpongRenderer extends Renderer {
             if (this.sprites[objId].el) {
                 // console.log(this.sprites[objId]);
                 this.sprites[objId].el.style.top = this.sprites[objId].y + "px";
+                this.sprites[objId].el.style.left = this.sprites[objId].x + "px";
             }
         }
 
@@ -56,6 +57,9 @@ class NetpongRenderer extends Renderer {
             else if (objData.id == 2){
                 sprite.el =  document.querySelector(".player2Paddle");
             }
+        }
+        else if (objData.class == Ball) {
+            sprite.el = document.querySelector(".ball");
         }
 
         this.sprites[objData.id] = sprite;

@@ -17,9 +17,12 @@ class NetpongGameEngine extends GameEngine {
         this.worldSettings = {
             width: 400,
             height: 400,
+            paddleWidth: 10,
+            paddleHeight: 50,
             paddlePadding: 20
         };
 
+        this.on("postStep", ()=>{ this.postStepHandleBall() });
     };
 
     processInput(inputData, playerId){
@@ -46,8 +49,9 @@ class NetpongGameEngine extends GameEngine {
 
     initGame(){
         //create the paddle objects
-        this.player1Paddle = new Paddle(++this.world.idCount, this.worldSettings.paddlePadding, this.worldSettings.paddlePadding);
-        this.player2Paddle = new Paddle(++this.world.idCount, this.worldSettings.width - this.worldSettings.paddlePadding, this.worldSettings.paddlePadding);
+        this.player1Paddle = new Paddle(++this.world.idCount, this.worldSettings.paddlePadding, 0);
+        this.player2Paddle = new Paddle(++this.world.idCount, this.worldSettings.width - this.worldSettings.paddlePadding, 0);
+        this.ball = new Ball(++this.world.idCount, this.worldSettings.width / 2, this.worldSettings.height / 2);
 
         //associate paddels with the right players
         this.player1Paddle.playerId = 0;
@@ -56,6 +60,7 @@ class NetpongGameEngine extends GameEngine {
         //add paddle objects to the game world
         this.addObjectToWorld(this.player1Paddle);
         this.addObjectToWorld(this.player2Paddle);
+        this.addObjectToWorld(this.ball);
     }
 
     attachPaddle(paddleId, playerId){
@@ -66,6 +71,43 @@ class NetpongGameEngine extends GameEngine {
         else if (paddleId === 1){
             this.player2Paddle.playerId = playerId;
         }
+    }
+
+    postStepHandleBall(){
+        if (this.ball) {
+            if (this.ball.x >= this.worldSettings.width ) {
+                this.player1Score();
+            }
+            else if (this.ball.x <= 0){
+                this.player2Score();
+            }
+            //ball hits top or bottom
+            else if (this.ball.y >= this.worldSettings.height || this.ball.y <= 0) {
+                this.ball.velocity.y *= -1;
+            }
+            //ball hits player 1 paddle
+            else if (this.ball.x <= this.worldSettings.paddlePadding + this.worldSettings.paddleWidth &&
+                    this.ball.y >= this.player1Paddle.y &&
+                    this.ball.y <= this.player1Paddle.y + this.worldSettings.paddleHeight ){
+                this.ball.velocity.x *= -1;
+            }
+            //ball hits player 2 paddle
+            else if (this.ball.x >= this.worldSettings.width - this.worldSettings.paddlePadding - this.worldSettings.paddleWidth &&
+                this.ball.y >= this.player2Paddle.y &&
+                this.ball.y <= this.player2Paddle.y + this.worldSettings.paddleHeight ){
+                this.ball.velocity.x *= -1;
+            }
+        }
+    };
+
+    player1Score(){
+        this.ball.x = this.worldSettings.width / 2;
+        this.ball.y = this.worldSettings.height / 2;
+    }
+
+    player2Score(){
+        this.ball.x = this.worldSettings.width / 2;
+        this.ball.y = this.worldSettings.height / 2;
     }
 
 }

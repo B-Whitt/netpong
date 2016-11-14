@@ -2,6 +2,9 @@ const ClientEngine = require('incheon').ClientEngine;
 const NetpongRenderer = require('../client/NetpongRenderer');
 const Synchronizer = require('incheon').Synchronizer;
 
+const Ball = require('../common/Ball');
+
+
 class NetpongClientEngine extends ClientEngine{
     constructor(gameEngine, options){
         super(gameEngine, options);
@@ -27,6 +30,19 @@ class NetpongClientEngine extends ClientEngine{
         this.serializer.registerClass(require('../common/Ball'));
 
         this.gameEngine.on('client.preStep', this.preStep.bind(this));
+
+        this.gameEngine.on('objectAdded', (object) => {
+            if (object.id == 1){
+                this.gameEngine.player1Paddle = object;
+            }
+            else if (object.id == 2){
+                this.gameEngine.player2Paddle = object;
+            }
+            else if (object.class == Ball){
+                this.gameEngine.ball = object;
+            }
+
+        });
 
         //keep a reference for key press state
         this.pressedKeys = {

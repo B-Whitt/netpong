@@ -19,6 +19,8 @@ class Ball extends DynamicObject {
         super(id, x, y);
 
         this.class = Ball;
+
+        this.velocity.set(2, 2);
     };
 
 }
