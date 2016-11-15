@@ -61,7 +61,6 @@ class NetpongGameEngine extends GameEngine {
         this.addObjectToWorld(this.player1Paddle);
         this.addObjectToWorld(this.player2Paddle);
         this.addObjectToWorld(this.ball);
-        this.isServer = true;
     }
 
     attachPaddle(paddleId, playerId){
@@ -75,7 +74,7 @@ class NetpongGameEngine extends GameEngine {
     }
 
     postStepHandleBall(){
-        if (this.ball && this.isServer) {
+        if (this.ball) {
 
             // LEFT EDGE:
             if (this.ball.x <= this.worldSettings.paddlePadding + this.worldSettings.paddleWidth &&
