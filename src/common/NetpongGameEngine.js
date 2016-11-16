@@ -79,16 +79,17 @@ class NetpongGameEngine extends GameEngine {
             // LEFT EDGE:
             if (this.ball.x <= this.worldSettings.paddlePadding + this.worldSettings.paddleWidth &&
                     this.ball.y >= this.player1Paddle.y &&
-                    this.ball.y <= this.player1Paddle.y + this.worldSettings.paddleHeight ){
+                    this.ball.y <= this.player1Paddle.y + this.worldSettings.paddleHeight &&
+                    this.ball.velocity.x < 0){
 
-                // ball hit player 1 paddle
+                // ball moving left hit player 1 paddle
                 this.ball.velocity.x *= -1;
                 this.ball.x = this.worldSettings.paddlePadding + this.worldSettings.paddleWidth + 1;
             } else if (this.ball.x <= 0){
 
                 // ball hit left wall
                 this.ball.velocity.x *= -1;
-                this.ball.x = this.worldSettings.paddlePadding + this.worldSettings.paddleWidth + 1;
+                this.ball.x = 0;
                 this.player2Score();
                 console.log(`player 2 scored`);
             }
@@ -96,16 +97,17 @@ class NetpongGameEngine extends GameEngine {
             // RIGHT EDGE:
             if (this.ball.x >= this.worldSettings.width - this.worldSettings.paddlePadding - this.worldSettings.paddleWidth &&
                 this.ball.y >= this.player2Paddle.y &&
-                this.ball.y <= this.player2Paddle.y + this.worldSettings.paddleHeight ){
+                this.ball.y <= this.player2Paddle.y + this.worldSettings.paddleHeight &&
+                this.ball.velocity.y > 0){
 
-                // ball hits player 2 paddle
+                // ball moving right hits player 2 paddle
                 this.ball.velocity.x *= -1;
                 this.ball.x = this.worldSettings.width - this.worldSettings.paddlePadding - this.worldSettings.paddleWidth - 1;
             } else if (this.ball.x >= this.worldSettings.width ) {
 
                 // ball hit right wall
                 this.ball.velocity.x *= -1;
-                this.ball.x = this.worldSettings.width - this.worldSettings.paddlePadding - this.worldSettings.paddleWidth - 1;
+                this.ball.x = this.worldSettings.width - 1;
                 this.player1Score();
                 console.log(`player 1 scored`);
             }

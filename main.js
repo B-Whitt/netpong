@@ -25,11 +25,11 @@ const io = socketIO(requestHandler);
  Game logic
  */
 
-const SpaaaceServerEngine = require(path.join(__dirname, 'src/server/NetpongServerEngine.js'));
-const SpaaaceGameEngine = require(path.join(__dirname, 'src/common/NetpongGameEngine.js'));
+const NetPongServerEngine = require(path.join(__dirname, 'src/server/NetpongServerEngine.js'));
+const NetPongGameEngine = require(path.join(__dirname, 'src/common/NetpongGameEngine.js'));
 
-const gameEngine = new SpaaaceGameEngine({ traceLevel: 1 });
-const serverEngine = new SpaaaceServerEngine(io, gameEngine, {
+const gameEngine = new NetPongGameEngine({ traceLevel: 0 });
+const serverEngine = new NetPongServerEngine(io, gameEngine, {
     debug:{
         // serverSendLag: 600
     }
