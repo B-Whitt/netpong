@@ -98,7 +98,7 @@ class NetpongGameEngine extends GameEngine {
             if (this.ball.x >= this.worldSettings.width - this.worldSettings.paddlePadding - this.worldSettings.paddleWidth &&
                 this.ball.y >= this.player2Paddle.y &&
                 this.ball.y <= this.player2Paddle.y + this.worldSettings.paddleHeight &&
-                this.ball.velocity.y > 0){
+                this.ball.velocity.x > 0){
 
                 // ball moving right hits player 2 paddle
                 this.ball.velocity.x *= -1;
