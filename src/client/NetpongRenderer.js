@@ -6,8 +6,8 @@ var Ball = require("../common/Ball");
 
 class NetpongRenderer extends Renderer {
 
-    constructor() {
-        super();
+    constructor(gameEngine) {
+        super(gameEngine);
 
         // TODO: the world settings are really a property of the GameEngine.
         //       but they are currently used by interpolate function of DynamicObject.
@@ -19,10 +19,6 @@ class NetpongRenderer extends Renderer {
         this.sprites = {};
     }
 
-    init() {
-        var that = this;
-    }
-
     draw() {
         super.draw();
 
@@ -31,8 +27,8 @@ class NetpongRenderer extends Renderer {
         for (let objId of Object.keys(this.sprites)) {
             if (this.sprites[objId].el) {
                 // console.log(this.sprites[objId]);
-                this.sprites[objId].el.style.top = this.sprites[objId].y + "px";
-                this.sprites[objId].el.style.left = this.sprites[objId].x + "px";
+                this.sprites[objId].el.style.top = this.gameEngine.world.objects[objId].y + "px";
+                this.sprites[objId].el.style.left = this.gameEngine.world.objects[objId].x + "px";
             }
         }
 

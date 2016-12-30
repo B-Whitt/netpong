@@ -20,20 +20,17 @@ var requestHandler = server.listen(PORT, () => console.log(`Listening on ${ PORT
 
 const io = socketIO(requestHandler);
 
-
-/*
- Game logic
- */
-
+// Game Server
 const NetPongServerEngine = require(path.join(__dirname, 'src/server/NetpongServerEngine.js'));
 const NetPongGameEngine = require(path.join(__dirname, 'src/common/NetpongGameEngine.js'));
+const SimplePhysicsEngine = require('incheon').physics.SimplePhysicsEngine;
 
-const gameEngine = new NetPongGameEngine({ traceLevel: 0 });
+// Game Instances
+const physicsEngine = new SimplePhysicsEngine();
+const gameEngine = new NetPongGameEngine({ physicsEngine, traceLevel: 0 });
 const serverEngine = new NetPongServerEngine(io, gameEngine, {
-    debug:{
-        // serverSendLag: 600
-    }
+    debug:{}
 });
 
-//start the game
+// start the game
 serverEngine.start();

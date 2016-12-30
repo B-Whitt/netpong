@@ -8,16 +8,13 @@ const Ball = require('../common/Ball');
 class NetpongClientEngine extends ClientEngine{
     constructor(gameEngine, options){
         super(gameEngine, options);
-        var that = this;
 
-        this.options = options; //TODO should be in parent class
-
-        //initialize renderer
-        this.renderer = new NetpongRenderer();
+        // initialize renderer
+        this.renderer = new NetpongRenderer(gameEngine);
         this.gameEngine.renderer = this.renderer; //TODO renderer shouldn't be tightly coupled with the game engine
 
-        //initialize object synchronization:
-        var syncOptions = {
+        // initialize object synchronization:
+        const syncOptions = {
             extrapolate: {
                 localObjBending: 0.0,
                 remoteObjBending: 0.6
@@ -29,7 +26,7 @@ class NetpongClientEngine extends ClientEngine{
         this.serializer.registerClass(require('../common/Paddle'));
         this.serializer.registerClass(require('../common/Ball'));
 
-        this.gameEngine.on('client.preStep', this.preStep.bind(this));
+        this.gameEngine.on('client__preStep', this.preStep.bind(this));
 
         this.gameEngine.on('objectAdded', (object) => {
             if (object.id == 1){
@@ -44,14 +41,15 @@ class NetpongClientEngine extends ClientEngine{
 
         });
 
-        //keep a reference for key press state
+        // keep a reference for key press state
         this.pressedKeys = {
             down: false,
             up: false
         };
 
-        document.onkeydown = function(e){ onKeyChange.call(that, e, true)};
-        document.onkeyup = function(e){ onKeyChange.call(that, e, false)};
+        let that = this;
+        document.onkeydown = (e) => { that.onKeyChange(e, true)};
+        document.onkeyup = (e) => { that.onKeyChange(e, false)};
     }
 
     start(){
@@ -100,24 +98,23 @@ class NetpongClientEngine extends ClientEngine{
         }
     }
 
+    onKeyChange(e, isDown) {
+        e = e || window.event;
+
+        if (e.keyCode == '38') {
+            this.pressedKeys.up = isDown;
+        }
+        else if (e.keyCode == '40') {
+            this.pressedKeys.down = isDown;
+        }
+        else if (e.keyCode == '37') {
+            this.pressedKeys.left = isDown;
+        }
+        else if (e.keyCode == '39') {
+            this.pressedKeys.right = isDown;
+        }
+    }
+
 }
-
-function onKeyChange(e, isDown) {
-    e = e || window.event;
-
-    if (e.keyCode == '38') {
-        this.pressedKeys.up = isDown;
-    }
-    else if (e.keyCode == '40') {
-        this.pressedKeys.down = isDown;
-    }
-    else if (e.keyCode == '37') {
-        this.pressedKeys.left = isDown;
-    }
-    else if (e.keyCode == '39') {
-        this.pressedKeys.right = isDown;
-    }
-}
-
 
 module.exports = NetpongClientEngine;
