@@ -6,10 +6,13 @@ body{
 }
 
 .gameContainer{
-    position: relative;
+    position: absolute;
     display: inline-block;
     width: 400px;
     height: 400px;
+    left: 50%;
+    top: 50%;
+    transform: translateX(-50%) translateY(-50%);
     background: black;
 }
 
