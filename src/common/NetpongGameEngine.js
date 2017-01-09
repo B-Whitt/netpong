@@ -32,7 +32,8 @@ class NetpongGameEngine extends GameEngine {
         var playerPaddle;
 
         for (let objId in this.world.objects) {
-            if (this.world.objects[objId].playerId == playerId){
+            let o = this.world.objects[objId];
+            if (o.playerId == playerId && o.class == Paddle){
                 playerPaddle = this.world.objects[objId];
                 break;
             }

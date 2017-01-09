@@ -41,38 +41,6 @@ class NetpongClientEngine extends ClientEngine{
         document.onkeyup = (e) => { that.onKeyChange(e, false)};
     }
 
-    start(){
-        var that = this;
-        super.start();
-
-        this.renderer.init();
-
-        // Simple JS game loop adapted from
-        // http://nokarma.org/2011/02/02/javascript-game-development-the-game-loop/
-        let skipTicks = 1000 / that.options.gameUps,
-            nextGameTick = (new Date).getTime();
-
-        let gameLoop = function(){
-            while ((new Date).getTime() > nextGameTick) {
-                that.step();
-                nextGameTick += skipTicks;
-            }
-            requestAnimationFrame(gameLoop);
-        };
-        gameLoop();
-
-
-        //draw on each animation frame
-        //also requestAnimationFrame
-        //todo something weird with the draw tired to game engine
-        // let drawLoop = function(){
-        //     that.renderer.draw();
-        //     requestAnimationFrame(drawLoop);
-        // };
-        //
-        // drawLoop();
-    }
-
     // our pre-step is to process all inputs
     preStep(){
         //continuous press

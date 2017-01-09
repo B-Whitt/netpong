@@ -15,7 +15,7 @@ class Ball extends DynamicObject {
         return newBall;
     }
 
-    get bendingMultiple() { return 0.1; }
+    get bendingMultiple() { return 0.8; }
     get velocityBendingMultiple() { return 0; }
 
     constructor(id, x, y){

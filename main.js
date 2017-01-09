@@ -29,6 +29,7 @@ const SimplePhysicsEngine = require('incheon').physics.SimplePhysicsEngine;
 const physicsEngine = new SimplePhysicsEngine();
 const gameEngine = new NetPongGameEngine({ physicsEngine, traceLevel: 0 });
 const serverEngine = new NetPongServerEngine(io, gameEngine, {
+    updateRate: 3,
     debug:{}
 });
 
