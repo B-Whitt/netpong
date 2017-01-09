@@ -10,8 +10,8 @@ class NetpongGameEngine extends GameEngine {
 
     }
 
-    start(){
-        var that = this;
+    start() {
+
         super.start();
 
         this.worldSettings = {
@@ -33,7 +33,7 @@ class NetpongGameEngine extends GameEngine {
 
         for (let objId in this.world.objects) {
             let o = this.world.objects[objId];
-            if (o.playerId == playerId && o.class == Paddle){
+            if (o.playerId == playerId && o.class == Paddle) {
                 playerPaddle = this.world.objects[objId];
                 break;
             }
@@ -124,7 +124,7 @@ class NetpongGameEngine extends GameEngine {
                 this.ball.velocity.y *= -1;
             }
         }
-    };
+    }
 
     player1Score(){
         // this.ball.x = this.worldSettings.width / 2;
