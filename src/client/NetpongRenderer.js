@@ -6,8 +6,8 @@ var Ball = require("../common/Ball");
 
 class NetpongRenderer extends Renderer {
 
-    constructor(gameEngine) {
-        super(gameEngine);
+    constructor(gameEngine, clientEngine) {
+        super(gameEngine, clientEngine);
 
         // TODO: the world settings are really a property of the GameEngine.
         //       but they are currently used by interpolate function of DynamicObject.
