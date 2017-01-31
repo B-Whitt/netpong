@@ -1,6 +1,5 @@
-"use strict";
+'use strict';
 
-const path = require('path');
 const ServerEngine = require('incheon').ServerEngine;
 
 class NetpongServerEngine extends ServerEngine{
@@ -19,18 +18,17 @@ class NetpongServerEngine extends ServerEngine{
         this.players = {
             player1: null,
             player2: null
-        }
+        };
     };
 
     onPlayerConnected(socket){
         super.onPlayerConnected(socket);
 
-        //attach newly connected player an available paddle
+        // attach newly connected player an available paddle
         if (this.players.player1 == null){
             this.players.player1 = socket.id;
             this.gameEngine.attachPaddle(0, socket.playerId);
-        }
-        else if (this.players.player2 == null) {
+        } else if (this.players.player2 == null) {
             this.players.player2 = socket.id;
             this.gameEngine.attachPaddle(1, socket.playerId);
         }
@@ -41,11 +39,10 @@ class NetpongServerEngine extends ServerEngine{
         super.onPlayerDisconnected(socketId, playerId);
 
         if (this.players.player1 == socketId){
-            console.log("Player 1 disconnected");
+            console.log('Player 1 disconnected');
             this.players.player1 = null;
-        }
-        else if (this.players.player2 == socketId){
-            console.log("Player 2 disconnected");
+        } else if (this.players.player2 == socketId){
+            console.log('Player 2 disconnected');
             this.players.player2 = null;
         }
 

@@ -1,5 +1,5 @@
-const qsOptions = require("query-string").parse(location.search);
-const NetpongClientEngine = require("../client/NetpongClientEngine");
+const qsOptions = require('query-string').parse(location.search);
+const NetpongClientEngine = require('../client/NetpongClientEngine');
 const NetpongGameEngine = require('../common/NetpongGameEngine');
 const SimplePhysicsEngine = require('incheon').physics.SimplePhysicsEngine;
 
@@ -17,6 +17,7 @@ const defaults = {
         bendingIncrements: 3
     }
 };
+
 let options = Object.assign(defaults, qsOptions);
 
 // initialize game engine
@@ -25,4 +26,4 @@ const gameOptions = Object.assign({ physicsEngine }, options);
 const gameEngine = new NetpongGameEngine(gameOptions);
 const netpongClientEngine = new NetpongClientEngine(gameEngine, options);
 
-document.addEventListener("DOMContentLoaded", function(e) { netpongClientEngine.start(); });
+document.addEventListener('DOMContentLoaded', function(e) { netpongClientEngine.start(); });

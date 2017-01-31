@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 
 const GameEngine = require('incheon').GameEngine;
 const Paddle = require('./Paddle');
@@ -22,14 +22,14 @@ class NetpongGameEngine extends GameEngine {
             paddlePadding: 20
         };
 
-        this.on("postStep", ()=>{ this.postStepHandleBall() });
+        this.on('postStep', ()=>{ this.postStepHandleBall(); });
     };
 
     processInput(inputData, playerId){
         super.processInput(inputData, playerId);
 
-        //get the player paddle tied to the player socket
-        var playerPaddle;
+        // get the player paddle tied to the player socket
+        let playerPaddle;
 
         for (let objId in this.world.objects) {
             let o = this.world.objects[objId];
@@ -39,37 +39,35 @@ class NetpongGameEngine extends GameEngine {
             }
         }
         if (playerPaddle) {
-            if (inputData.input == "up") {
+            if (inputData.input == 'up') {
                 playerPaddle.y -= 5;
-            }
-            else if (inputData.input == "down") {
+            } else if (inputData.input == 'down') {
                 playerPaddle.y += 5;
             }
         }
     };
 
     initGame(){
-        //create the paddle objects
+        // create the paddle objects
         this.player1Paddle = new Paddle(++this.world.idCount, this.worldSettings.paddlePadding, 0);
         this.player2Paddle = new Paddle(++this.world.idCount, this.worldSettings.width - this.worldSettings.paddlePadding, 0);
         this.ball = new Ball(++this.world.idCount, this.worldSettings.width / 2, this.worldSettings.height / 2);
 
-        //associate paddels with the right players
+        // associate paddels with the right players
         this.player1Paddle.playerId = 0;
         this.player2Paddle.playerId = 1;
 
-        //add paddle objects to the game world
+        // add paddle objects to the game world
         this.addObjectToWorld(this.player1Paddle);
         this.addObjectToWorld(this.player2Paddle);
         this.addObjectToWorld(this.ball);
     }
 
     attachPaddle(paddleId, playerId){
-        //which player?
+        // which player?
         if (paddleId === 0){
             this.player1Paddle.playerId = playerId;
-        }
-        else if (paddleId === 1){
+        } else if (paddleId === 1){
             this.player2Paddle.playerId = playerId;
         }
     }
@@ -117,9 +115,8 @@ class NetpongGameEngine extends GameEngine {
             if (this.ball.y <= 0) {
                 this.ball.y = 1;
                 this.ball.velocity.y *= -1;
-            }
-            // ball hits bottom
-            else if (this.ball.y >= this.worldSettings.height) {
+            } else if (this.ball.y >= this.worldSettings.height) {
+                // ball hits bottom
                 this.ball.y = this.worldSettings.height - 1;
                 this.ball.velocity.y *= -1;
             }

@@ -1,7 +1,5 @@
 const ClientEngine = require('incheon').ClientEngine;
 const NetpongRenderer = require('../client/NetpongRenderer');
-const Synchronizer = require('incheon').Synchronizer;
-
 const Ball = require('../common/Ball');
 
 
@@ -20,11 +18,9 @@ class NetpongClientEngine extends ClientEngine{
         this.gameEngine.on('objectAdded', (object) => {
             if (object.id == 1){
                 this.gameEngine.player1Paddle = object;
-            }
-            else if (object.id == 2){
+            } else if (object.id == 2){
                 this.gameEngine.player2Paddle = object;
-            }
-            else if (object.class == Ball){
+            } else if (object.class == Ball){
                 this.gameEngine.ball = object;
             }
 
@@ -37,20 +33,20 @@ class NetpongClientEngine extends ClientEngine{
         };
 
         let that = this;
-        document.onkeydown = (e) => { that.onKeyChange(e, true)};
-        document.onkeyup = (e) => { that.onKeyChange(e, false)};
+        document.onkeydown = (e) => { that.onKeyChange(e, true);};
+        document.onkeyup = (e) => { that.onKeyChange(e, false);};
     }
 
     // our pre-step is to process all inputs
     preStep(){
-        //continuous press
+        // continuous press
         if (this.pressedKeys.up) {
-            console.log("sent up");
+            console.log('sent up');
             this.sendInput('up');
         }
 
         if (this.pressedKeys.down) {
-            console.log("sent down");
+            console.log('sent down');
             this.sendInput('down');
         }
     }
@@ -60,14 +56,11 @@ class NetpongClientEngine extends ClientEngine{
 
         if (e.keyCode == '38') {
             this.pressedKeys.up = isDown;
-        }
-        else if (e.keyCode == '40') {
+        } else if (e.keyCode == '40') {
             this.pressedKeys.down = isDown;
-        }
-        else if (e.keyCode == '37') {
+        } else if (e.keyCode == '37') {
             this.pressedKeys.left = isDown;
-        }
-        else if (e.keyCode == '39') {
+        } else if (e.keyCode == '39') {
             this.pressedKeys.right = isDown;
         }
     }

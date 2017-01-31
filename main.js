@@ -9,14 +9,11 @@ const INDEX = path.join(__dirname, './index.html');
 
 const server = express();
 
-server.get('/', function (req, res) {
-    res.sendFile(INDEX)
-});
-
+server.get('/', function(req, res) { res.sendFile(INDEX); });
 
 server.use('/', express.static(path.join(__dirname, '.')));
 
-var requestHandler = server.listen(PORT, () => console.log(`Listening on ${ PORT }`));
+let requestHandler = server.listen(PORT, () => console.log(`Listening on ${ PORT }`));
 
 const io = socketIO(requestHandler);
 
@@ -27,10 +24,10 @@ const SimplePhysicsEngine = require('incheon').physics.SimplePhysicsEngine;
 
 // Game Instances
 const physicsEngine = new SimplePhysicsEngine();
-const gameEngine = new NetPongGameEngine({ physicsEngine, traceLevel: 0 });
+const gameEngine = new NetPongGameEngine({ physicsEngine });
 const serverEngine = new NetPongServerEngine(io, gameEngine, {
     updateRate: 3,
-    debug:{}
+    debug: {}
 });
 
 // start the game
