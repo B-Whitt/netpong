@@ -15,8 +15,8 @@ class Paddle extends DynamicObject {
         return newPaddle;
     }
 
-    constructor(id, x, y){
-        super(id, x, y);
+    constructor(id, position, velocity){
+        super(id, position, velocity);
 
         this.class = Paddle;
     };

@@ -5,10 +5,7 @@ const Ball = require('../common/Ball');
 
 class NetpongClientEngine extends ClientEngine{
     constructor(gameEngine, options){
-        super(gameEngine, options);
-
-        // initialize renderer
-        this.renderer = new NetpongRenderer(gameEngine);
+        super(gameEngine, options, NetpongRenderer);
 
         this.serializer.registerClass(require('../common/Paddle'));
         this.serializer.registerClass(require('../common/Ball'));

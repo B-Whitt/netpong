@@ -18,8 +18,8 @@ class Ball extends DynamicObject {
     get bendingMultiple() { return 0.8; }
     get velocityBendingMultiple() { return 0; }
 
-    constructor(id, x, y){
-        super(id, x, y);
+    constructor(id, position){
+        super(id, position);
 
         this.class = Ball;
 
