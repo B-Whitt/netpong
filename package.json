@@ -12,7 +12,7 @@
   "license": "Apache-2.0",
   "dependencies": {
     "express": "^4.14.0",
-    "incheon": "0.9.3",
+    "incheon": "OpherV/Incheon.git#develop",
     "query-string": "^4.2.3",
     "socket.io": "^1.5.1"
   },
