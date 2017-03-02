@@ -77,10 +77,11 @@ class NetpongGameEngine extends GameEngine {
         if (this.ball) {
 
             // LEFT EDGE:
-            if (this.ball.position.x <= this.worldSettings.paddlePadding + this.worldSettings.paddleWidth &&
-                    this.ball.position.y >= this.player1Paddle.position.y &&
-                    this.ball.position.y <= this.player1Paddle.position.y + this.worldSettings.paddleHeight &&
-                    this.ball.velocity.x < 0){
+            if ( this.player1Paddle &&
+                this.ball.position.x <= this.worldSettings.paddlePadding + this.worldSettings.paddleWidth &&
+                this.ball.position.y >= this.player1Paddle.position.y &&
+                this.ball.position.y <= this.player1Paddle.position.y + this.worldSettings.paddleHeight &&
+                this.ball.velocity.x < 0){
 
                 // ball moving left hit player 1 paddle
                 this.ball.velocity.x *= -1;
@@ -95,7 +96,8 @@ class NetpongGameEngine extends GameEngine {
             }
 
             // RIGHT EDGE:
-            if (this.ball.position.x >= this.worldSettings.width - this.worldSettings.paddlePadding - this.worldSettings.paddleWidth &&
+            if ( this.player2Paddle &&
+                this.ball.position.x >= this.worldSettings.width - this.worldSettings.paddlePadding - this.worldSettings.paddleWidth &&
                 this.ball.position.y >= this.player2Paddle.position.y &&
                 this.ball.position.y <= this.player2Paddle.position.y + this.worldSettings.paddleHeight &&
                 this.ball.velocity.x > 0){
