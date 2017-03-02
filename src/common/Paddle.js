@@ -8,16 +8,8 @@ class Paddle extends DynamicObject {
         return Object.assign({}, super.netScheme);
     }
 
-    static newFrom(sourceObj){
-        let newPaddle = new Paddle();
-        newPaddle.copyFrom(sourceObj);
-
-        return newPaddle;
-    }
-
     constructor(id, position, velocity){
         super(id, position, velocity);
-
         this.class = Paddle;
     };
 
