@@ -1,6 +1,6 @@
 {
   "name": "netpong",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "A networked version of the classic Pong, based on the Incheon game server",
   "main": "main.js",
   "scripts": {
@@ -12,7 +12,7 @@
   "license": "Apache-2.0",
   "dependencies": {
     "express": "^4.14.0",
-    "incheon": "OpherV/Incheon.git#develop",
+    "incheon": "~1.0.0",
     "query-string": "^4.2.3",
     "socket.io": "^1.5.1"
   },
